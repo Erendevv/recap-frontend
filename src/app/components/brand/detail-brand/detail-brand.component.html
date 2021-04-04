@@ -1,0 +1,16 @@
+ 
+<ul  class="list-group">
+    <div class="mb-3">
+        <label for="filterText" class="form-label">Search With Brand</label>
+        <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Brand">
+      </div>
+    <li class="list-group-item " routerLink="/cars" ><h6> All Brands</h6></li>
+    <li (click)="setCurrentBrand(brand)"
+    routerLink="cars/brands/{{brand.id}}"
+     [class]="getCurrentBrandClass(brand)" 
+      *ngFor="let brand of brands|brandFilter:filterText">{{brand.brandName}}
+    
+      <div><button routerLink="/brand/update/{{brand.id}}"  class="btn btn-outline-success">Güncelle</button></div>
+    </li>
+ 
+  </ul>

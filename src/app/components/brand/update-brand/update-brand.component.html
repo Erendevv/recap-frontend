@@ -1,0 +1,30 @@
+  
+<div class="content">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Marka Güncelle</h5>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="brandUpdateForm" *ngIf='brand'>
+                        <div class="mb-3">
+                            <label for="brandName" class="fore-label">Brand Name</label>
+                            <div class="form-group">
+                                <input type="text" id="brandName" formControlName="brandName" placeholder="Brand Name"
+                                    class="form-control" />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-fill btn-success" (click)="update()">Ekle</button>
+                    <button class="btn btn-fill btn-danger float-right" (click)="delete()">Sil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

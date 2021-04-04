@@ -1,0 +1,18 @@
+  
+<ul  class="list-group">
+    <div class="mb-3">
+        <label for="filterText" class="form-label">Search With Color</label>
+        <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" placeholder="Color">
+      </div>
+    
+    <li class="list-group-item" routerLink="cars"><h6> All Colors</h6></li>
+    <li (click)="setCurrentColor(color)"
+    routerLink="cars/colors/{{color.id}}"
+     [class]="getCurrentColorClass(color)"
+     *ngFor="let color of colors |colorFilter:filterText"> {{color.colorName}}  
+     <div><button routerLink="/color/update/{{color.id}}"  class="btn btn-outline-success">Güncelle</button></div>  </li> 
+
+
+
+ 
+  </ul>

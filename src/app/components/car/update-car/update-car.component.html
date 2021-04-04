@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-center">
+    <div *ngIf="!brandLoaded !colorLoaded" class="spinner-border text-primary" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
+
+<div class="content" *ngIf='brandLoaded colorLoaded'>
+    <div class="row" *ngIf='car'>
+        <div class="col-md-3 "></div>
+        <div class="col-md-6 ">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="title">Araç Güncelle</h5>
+                </div>
+
+                <div class="card-body">
+                    <form [formGroup]="carUpdateForm">
+
+                        <div class="mb3">
+                            <label for="id" class="form-label">Car No</label>
+                            <select class="form-control form-select mb-3" name="id" id="id"
+                                formControlName="id" aria-label=".form-select-lg example">
+                                <option *ngFor="let c of car" [ngValue]="c.id">{{c.id}}
+                                </option>
+                            </select>
+                        </div>
+                  
+                        <div class="mb3">
+                            <label for="brandId" class="form-label">Brand</label>
+                            <select class="form-control form-select mb-3" name="brandId" id="brandId" type="number"
+                                formControlName="brandId" aria-label=".form-select-lg example">
+                                <option *ngFor="let brand of brands" [ngValue]="brand.id">{{brand.brandName}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb3">
+                            <label for="colorId" class="form-label">Color</label>
+                            <select class="form-control form-select mb-3" name="colorId" id="colorId"
+                                formControlName="colorId" aria-label=".form-select-lg example">
+                                <option *ngFor="let color of colors" [ngValue]="color.id">{{color.colorName}}
+                                </option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="modelYear">Model Year</label>
+                            <div class="form-group">
+                                <input type="number" id="modelYear" formControlName="modelYear" placeholder="Model Year"
+                                    class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="dailyPrice">Daily Price</label>
+                            <div class="form-group">
+                                <input type="number" id="dailyPrice" formControlName="dailyPrice"
+                                    placeholder="Daily Price" class="form-control" />
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="description" class="fore-label">Description</label>
+                            <div class="form-group">
+                                <input type="text" id="description" formControlName="description"
+                                    placeholder="Description" class="form-control" />
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="card-footer">
+                    <button class="btn btn-fill btn-success" (click)="update()">Güncelle</button>
+                    <button class="btn btn-fill btn-danger float-right" (click)="delete()">Sil</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+<table class="table table-bordered"  >
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Car Id </th>
+            <th>Date </th>
+            <th>Image</th>
+
+ 
+        </tr>
+    </thead>
+    <tr *ngFor="let carimage of carimages">
+        <td>{{carimage.id}}</td>
+        <td>{{carimage.carId}}</td>
+        <td>{{carimage.date}}</td>
+        <td>  <img
+            src="https://localhost:44303/{{carimage.imagePath}}"
+
+           
+          /></td>
+
+   
+
+
+    </tr>
+</table>

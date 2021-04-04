@@ -1,0 +1,118 @@
+<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-dark bg-dark headroom headroom--top headroom--pinned">
+  <div class="container">
+
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+       
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+        <li class="nav-item  " >
+          <a class="nav-link no-caret" role="button" href="/"  >
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link text-white" >Home</span>
+          </a>
+    
+        </li>
+
+             <li class="nav-item  " >
+          <a class="nav-link no-caret" role="button" href="/#/detail-color"  >
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link text-white" >Colors</span>
+          </a>
+    
+        </li>
+        <li class="nav-item  " >
+          <a class="nav-link no-caret" role="button" href="/#/detail-brand"  >
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link text-white" >Brands</span>
+          </a>
+    
+        </li>
+      </ul>
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        <li class="nav-item">
+          <a class="nav-link nav-link-icon" href="https://instagram.com/m.erenu/" target="_blank" data-toggle="tooltip" title="Follow me on Instagram">
+            <i class="fa fa-instagram text-white" ></i>
+            <span class="nav-link-inner text-white d-lg-none">Instagram</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-icon" href="https://twitter.com/m_erenu" target="_blank" data-toggle="tooltip" title="Follow me on Twitter">
+            <i class="fa fa-twitter-square text-white"></i>
+            <span class="nav-link-inner text-white d-lg-none">Twitter</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-icon" href="https://github.com/Erendevv" target="_blank" data-toggle="tooltip" title="Star me on Github">
+            <i class="fa fa-github text-white"></i>
+            <span class="nav-link-inner  d-lg-none">Github</span>
+          </a>
+        </li>
+        <li class="nav-item d-none d-lg-block ml-lg-4">        
+            <span class="btn-inner--icon">
+              <i class="fa fa-user mr-2 text-white"></i>
+            </span>
+            <span class="nav-link-inner text-white">Profile</span>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="position-relative">
+    <!-- Hero for FREE version -->
+    <section class="section section-lg section-hero section-shaped">
+      <!-- Background circles -->
+      <div class="shape shape-style-1 shape-primary">
+        <span class="span-150"></span>
+        <span class="span-50"></span>
+        <span class="span-50"></span>
+        <span class="span-75"></span>
+        <span class="span-100"></span>
+        <span class="span-75"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+        <span class="span-50"></span>
+        <span class="span-100"></span>
+      </div>
+      <div class="container shape-container d-flex align-items-center py-lg">
+        <div class="col px-0">
+          <div class="row align-items-center justify-content-center">
+            <div class="col-lg-6 text-center">
+           <h3 class="text-white">Rent a Car</h3>
+              <p class="lead text-white">Pay on arrival, no deposits</p>
+              <div class="btn-wrapper mt-5">
+                <button type="button" class="btn btn-outline-default text-white">Start</button>
+              </div>
+              <div class="mt-5">
+                <small class="text-white font-weight-bold mb-0 mr-2">*coded  by <strong>erendevv</strong> </small>
+             
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- SVG separator -->
+      <div class="separator separator-bottom separator-skew zindex-100">
+    
+      </div>
+    </section>
+  </div>
+  <app-sections></app-sections>
+</main>
