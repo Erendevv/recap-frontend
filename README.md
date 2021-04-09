@@ -23,6 +23,6 @@ Run ng build to build the project. The build artifacts will be stored in the dis
 (Projeyi kullanıma hazır haline getirmek için ng build komutunu çalıştırın. Dosyalar komutu çalıştırdığınız dizin içerisinde dist/ klasöründe saklanacaktır. Bir üretim derlemesi için --prod bayrağını kullanın.)
 
 Contact
-Eren Uğur- erendev.com
+Eren Uğur- www.erendev.com
 
 Project Link: https://github.com/Erendevv/recap-frontend
