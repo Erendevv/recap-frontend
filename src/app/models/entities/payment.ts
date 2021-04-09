@@ -5,4 +5,5 @@ export interface Payment{
     cardExpiryDate:string;
     cardCvv:string;
     amountPaye:number;
+
 }

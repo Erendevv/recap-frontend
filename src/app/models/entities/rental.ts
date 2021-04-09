@@ -13,6 +13,7 @@ export interface Rental{
      modelYear:number,
      dailyPrice:number,
      description:string,
+     findeksSkore:number;
      
 
 

@@ -16,6 +16,10 @@ import { DetailColorComponent } from './components/color/detail-color/detail-col
 import { UpdateBrandComponent } from './components/brand/update-brand/update-brand.component';
 import { DetailBrandComponent } from './components/brand/detail-brand/detail-brand.component';
 import { UpdateCarComponent } from './components/car/update-car/update-car.component';
+import { LoginComponent } from './components/login/login.component';
+import { LoginGuard } from './guards/login.guard';
+import { RegisterComponent } from './components/register/register.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -32,16 +36,19 @@ const routes: Routes =[
   {path:"cars/filter/:brandId/:colorId",component:CarComponent},
   {path:"cars/rental/:carId",component:RentalComponent},
   {path:"payment/:rental",component:PaymentComponent},
-  {path:"brand/add",component:AddBrandComponent},
-  {path:"color/add",component:AddColorComponent},
-  {path:"car/add",component:AddCarComponent},
+  {path:"brand/add",component:AddBrandComponent,canActivate:[LoginGuard]},
+  {path:"color/add",component:AddColorComponent,canActivate:[LoginGuard]},
+  {path:"car/add",component:AddCarComponent,canActivate:[LoginGuard]},
   {path:"brands",component:BrandComponent},
   {path:"colors",component:ColorComponent},
-  {path:"color/update/:colorId",component:UpdateColorComponent},
-  {path:"detail-color",component:DetailColorComponent},
-  {path:"brand/update/:brandId",component:UpdateBrandComponent},
-  {path:"detail-brand",component:DetailBrandComponent},
-  {path:"car/update/:carId",component:UpdateCarComponent},
+  {path:"color/update/:colorId",component:UpdateColorComponent,canActivate:[LoginGuard]},
+  {path:"detail-color",component:DetailColorComponent,canActivate:[LoginGuard]},
+  {path:"brand/update/:brandId",component:UpdateBrandComponent,canActivate:[LoginGuard]},
+  {path:"detail-brand",component:DetailBrandComponent,canActivate:[LoginGuard]},
+  {path:"car/update/:carId",component:UpdateCarComponent,canActivate:[LoginGuard]},
+  {path:"login",component:LoginComponent},
+  {path:"register",component:RegisterComponent},
+  {path:"profile",component:ProfileComponent,canActivate:[LoginGuard]},
 
   
 

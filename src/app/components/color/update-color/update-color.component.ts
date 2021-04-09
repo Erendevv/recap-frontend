@@ -53,21 +53,21 @@ export class UpdateColorComponent implements OnInit {
           setTimeout(() => {
             this.router.navigate(['/colors']);
           }, 1000);
-          this.toastrService.success(response.message, 'Başarılı');
+          this.toastrService.success(response.message, 'Successful');
         },
         (responseError) => {
           if (responseError.error.Errors.length > 0) {
             for (let i = 0; i < responseError.error.Errors.length; i++) {
               this.toastrService.error(
                 responseError.error.Errors[i].ErrorMessage,
-                'Doğrulama hatası'
+                'Verification error'
               );
             }
           }
         }
       );
     } else {
-      this.toastrService.error('Tüm alanları doldurmak zorunludur', 'Uyarı');
+      this.toastrService.error('All fields are required', 'Warning');
     }
   }
 
@@ -78,14 +78,14 @@ export class UpdateColorComponent implements OnInit {
         setTimeout(() => {
           this.router.navigate(['/colors']);
         }, 1000);
-        this.toastrService.info(response.message, 'Başarılı');
+        this.toastrService.info(response.message, 'Successful');
       },
       (responseError) => {
         if (responseError.error.Errors.length > 0) {
           for (let i = 0; i < responseError.error.Errors.length; i++) {
             this.toastrService.error(
               responseError.error.Errors[i].ErrorMessage,
-              'Doğrulama hatası'
+              'Verification error'
             );
           }
         }

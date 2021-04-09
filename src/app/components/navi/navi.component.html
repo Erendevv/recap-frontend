@@ -1,4 +1,4 @@
-<nav id="navbar-main" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-dark bg-dark headroom headroom--top headroom--pinned">
+<nav id="navbar-main" *ngIf="authService.isAuthenticated() == false" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-dark bg-dark headroom headroom--top headroom--pinned">
   <div class="container">
 
     <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
@@ -30,14 +30,14 @@
         </li>
 
              <li class="nav-item  " >
-          <a class="nav-link no-caret" role="button" href="/#/detail-color"  >
+          <a class="nav-link no-caret" role="button" href="/#/colors"  >
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link text-white" >Colors</span>
           </a>
     
         </li>
         <li class="nav-item  " >
-          <a class="nav-link no-caret" role="button" href="/#/detail-brand"  >
+          <a class="nav-link no-caret" role="button" href="/#/brands"  >
             <i class="ni ni-ui-04 d-lg-none"></i>
             <span class="nav-link text-white" >Brands</span>
           </a>
@@ -67,11 +67,115 @@
             <span class="btn-inner--icon">
               <i class="fa fa-user mr-2 text-white"></i>
             </span>
-            <span class="nav-link-inner text-white">Profile</span>
+            <a routerLink="/login" class="nav-link-inner text-white">Sign In</a>
         </li>
+        <li class="nav-item d-none d-lg-block ml-lg-4">        
+          <span class="btn-inner--icon">
+            <i class="fa fa-user mr-2 text-white"></i>
+          </span>
+          <a routerLink="/register" class="nav-link-inner text-white">Register</a>
+      </li>
       </ul>
     </div>
   </div>
+</nav>
+<nav id="navbar-main" *ngIf="authService.isAuthenticated() == true" class="navbar navbar-main navbar-expand-lg navbar-transparent navbar-dark bg-dark headroom headroom--top headroom--pinned">
+  <div class="container">
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed"
+          [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse" id="navbar_global" [ngbCollapse]="isCollapsed">
+      <div class="navbar-collapse-header">
+        <div class="row">
+          <div class="col-6 collapse-brand">
+       
+          </div>
+          <div class="col-6 collapse-close">
+            <button type="button" class="navbar-toggler" (click)="isCollapsed = !isCollapsed"
+                  [attr.aria-expanded]="!isCollapsed" aria-controls="navbar_global">
+              <span></span>
+              <span></span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <ul class="navbar-nav navbar-nav-hover align-items-lg-center">
+        <li class="nav-item  " >
+          <a class="nav-link no-caret" role="button" href="/"  >
+            <i class="ni ni-ui-04 d-lg-none"></i>
+            <span class="nav-link text-white" >Home</span>
+          </a>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner text-white">Cars </span>
+          </a>
+          <div class="dropdown-menu">
+            <a routerLink="/car/add" class="dropdown-item">Add Car</a>
+    
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner text-white">Colors </span>
+          </a>
+          <div class="dropdown-menu">
+            <a routerLink="/detail-color" class="dropdown-item">Colors</a>
+            <a routerLink="/color/add" class="dropdown-item">Add Color</a>
+    
+          </div>
+        </li>
+   
+        <li class="nav-item dropdown">
+          <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+            <i class="ni ni-collection d-lg-none"></i>
+            <span class="nav-link-inner text-white">Brands </span>
+          </a>
+          <div class="dropdown-menu">
+            <a routerLink="/detail-brand" class="dropdown-item">Brands</a>
+            <a routerLink="/brand/add" class="dropdown-item">Add Brand</a>
+    
+          </div>
+        </li>
+      </ul>
+      <ul class="navbar-nav align-items-lg-center ml-lg-auto">
+        <li class="nav-item">
+          <a class="nav-link nav-link-icon" href="https://instagram.com/m.erenu/" target="_blank" data-toggle="tooltip" title="Follow me on Instagram">
+            <i class="fa fa-instagram text-white" ></i>
+            <span class="nav-link-inner text-white d-lg-none">Instagram</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-icon" href="https://twitter.com/m_erenu" target="_blank" data-toggle="tooltip" title="Follow me on Twitter">
+            <i class="fa fa-twitter-square text-white"></i>
+            <span class="nav-link-inner text-white d-lg-none">Twitter</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-link-icon" href="https://github.com/Erendevv" target="_blank" data-toggle="tooltip" title="Star me on Github">
+            <i class="fa fa-github text-white"></i>
+            <span class="nav-link-inner  d-lg-none">Github</span>
+          </a>
+        </li>
+     
+      </ul>
+    </div>
+    <li class="nav-item dropdown">
+      <a class="nav-link no-caret" data-toggle="dropdown" role="button">
+        <i class="ni ni-collection d-lg-none"></i>
+        <span class="nav-link-inner text-white">Welcome {{authService.name}} </span>
+      </a>
+      <div class="dropdown-menu">
+        <a routerLink="/profile" class="dropdown-item">Profile</a>
+        <a (click)="logOut()" class="dropdown-item">Sign Out</a>
+
+      </div>
+    </li>
+  </div>
+  
 </nav>
 
 <main>

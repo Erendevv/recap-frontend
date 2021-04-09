@@ -6,13 +6,13 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th>Kiralanan Tarih</th>
-                    <th>Teslim Tarihi</th>
-                    <th>Marka</th>
-                    <th>Renk</th>
+                    <th>Rent Date</th>
+                    <th>Return Date</th>
+                    <th>Brand</th>
+                    <th>Color</th>
                     <th>Model</th>
-                    <th>Günlük Kiralama Fiyatı</th>
-                    <th>Toplam</th>
+                    <th>Daily Price</th>
+                    <th>Total</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,12 +34,13 @@
 
 <div class="card-mt-4">
     <div class="card-header text-center">
-        <strong>Ödeme İşlemi</strong>
+        <strong>Payment</strong>
     </div>
+    
     <div class="card-body">
         <div class="row">
             <div class="inputbox mt-3">
-                <span>Kart Üzerindeki Ad Soyad</span>
+                <span>Name On The Card</span>
                 <input [(ngModel)]="nameOnTheCard"
                 type="text" name="name" class="form-control"
                 required="required">
@@ -47,7 +48,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="inputbox mt-3 mr-2">
-                        <span>Kart Numarası</span>
+                        <span>Card Number</span>
                         <input [(ngModel)]="cardNumber"
                         type="text" name="name" class="form-control"
                         required="required">
@@ -57,18 +58,24 @@
                 <div class="col-md-6">
                     <div class="d-flex flex-row">
                         <div class="inputbox mt-3 mr-2">
-                            <span>Son Kullanım Tarihi</span>
+                            <span>Expiration Date</span>
                             <input [(ngModel)]="expirationDate"
                             type="text" name="name" class="form-control"
                             required="required">
                         </div>
                         <div class="inputbox mt-3 mr-2">
-                            <span>Güvenlik Kodu</span>
+                            <span>Cvv</span>
                             <input [(ngModel)]="cardCvv"
                             type="text" name="name" class="form-control"
                             required="required">
                         </div>
                     </div>
+                </div>
+                <div class="check">
+                    <div class="form-check form-switch">
+                        <input [(ngModel)]="isChecked" class="form-check-input" type="checkbox" id="isChecked" checked>
+                        <label class="form-check-label" for="isChecked">Save the Card</label>
+                      </div>
                 </div>
             </div>
         </div>
@@ -77,8 +84,34 @@
         <div class="row">
             <button (click)="rentACar()" class="btn btn-success">
                 <strong>{{paymentAmount | currency: "₺"}}</strong> 
-                Ödeme Yap
+                Pay
             </button>
+   
         </div>
     </div>
+    
+  <div class="row">
+    <div class="col">
+       <table class="table" >
+         <tbody>
+           <thead>Saved Card</thead>
+           <tr>
+             <th>Card No</th>
+             <th>Card Name</th>
+             <th>Expiration Date</th>
+             <th>CVV </th>
+             <th></th>
+
+            </tr>
+           <tr  >
+             <td>{{savedCard.cardNumber}}</td>
+             <td>{{savedCard.nameOnTheCard}}</td>
+             <td>{{savedCard.expirationDate}}</td>
+             <td>{{savedCard.cardCvv}}</td>
+             <td (click)="setCurrentCard()"><button class="btn btn-info">Choose</button></td>
+            </tr>
+         </tbody>
+       </table>
+    </div>
+  </div>
 </div>

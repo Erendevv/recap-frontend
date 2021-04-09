@@ -10,7 +10,7 @@
      [class]="getCurrentBrandClass(brand)" 
       *ngFor="let brand of brands|brandFilter:filterText">{{brand.brandName}}
     
-      <div><button routerLink="/brand/update/{{brand.id}}"  class="btn btn-outline-success">Güncelle</button></div>
+      <div><button routerLink="/brand/update/{{brand.id}}"  class="btn btn-outline-success">Update</button></div>
     </li>
  
   </ul>

@@ -10,7 +10,7 @@
     routerLink="cars/colors/{{color.id}}"
      [class]="getCurrentColorClass(color)"
      *ngFor="let color of colors |colorFilter:filterText"> {{color.colorName}}  
-     <div><button routerLink="/color/update/{{color.id}}"  class="btn btn-outline-success">Güncelle</button></div>  </li> 
+     <div><button routerLink="/color/update/{{color.id}}"  class="btn btn-outline-success">Update</button></div>  </li> 
 
 
 

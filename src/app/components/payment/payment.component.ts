@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
@@ -8,6 +8,7 @@ import { Customer } from 'src/app/models/entities/customer';
 import { Rental } from 'src/app/models/entities/rental';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
+import { LocalStorageService } from 'src/app/services/local-storage.service';
 import { PaymentService } from 'src/app/services/payment.service';
 import { RentalService } from 'src/app/services/rental.service';
 
@@ -22,8 +23,12 @@ export class PaymentComponent implements OnInit {
   expirationDate:string;
   cardCvv:string;
   moneyInTheCard:number;
-
-
+  isChecked:boolean;
+  savedName:string;
+  savedNumber:string;
+  savedDate:string;
+  savedCvv:string;
+  savedCard:CreditCard
 
   customer:Customer;
   rental :Rental;
@@ -32,7 +37,7 @@ export class PaymentComponent implements OnInit {
   creditCard: CreditCard;
   cardExist:boolean =false;
   getCustomerId:number;
-
+  @Input() expirationDateInput: string;
 
 
   constructor(
@@ -42,7 +47,8 @@ export class PaymentComponent implements OnInit {
     private router :Router,
     private toastrService:ToastrService,
     private paymentService:PaymentService,
-    private rentalService:RentalService
+    private rentalService:RentalService,
+    private LocalStorageService:LocalStorageService
   ) { }
 
   ngOnInit(): void {
@@ -52,6 +58,7 @@ export class PaymentComponent implements OnInit {
         this.getCustomerId =JSON.parse(params['rental']).customerId;
         this.getCustomerDetailById(this.getCustomerId);
         this.getCarDetails();
+        this.getCardFromLocaleStorage();
       }
     });
   }
@@ -80,19 +87,21 @@ export class PaymentComponent implements OnInit {
       this.paymentAmount = rentDays * this.cars.dailyPrice;
       if(this.paymentAmount <= 0){
         this.router.navigate(['/cars']);
-        this.toastrService.error('Ana sayfaya yönlendiriliyorsunuz','Hatalı işlem');
+        this.toastrService.error('You are redirected to the homepage','Error');
       }
     }
   }
+
 
   async rentACar(){
     let verifyCreditCard:CreditCard ={
       nameOnTheCard: this.nameOnTheCard,
       cardNumber: this.cardNumber,
       expirationDate: this.expirationDate,
-      cardCvv: this.cardCvv
+      cardCvv: this.cardCvv,
+      isChecked:this.isChecked
     }
-
+console.log(this.isChecked)
     this.cardExist = await this.isCardExist(verifyCreditCard);
     if(this.cardExist){
       this.creditCard = await this.getCreditCardByCardNumber(this.cardNumber);
@@ -100,13 +109,20 @@ export class PaymentComponent implements OnInit {
       if(this.creditCard.moneyInTheCard as number >= this.paymentAmount){
         this.creditCard.moneyInTheCard = this.creditCard.moneyInTheCard as number - this.paymentAmount;
         this.updateCard(verifyCreditCard);
+        if(this.isChecked==true){
+          this.LocalStorageService.add("nameOnTheCard",verifyCreditCard.nameOnTheCard);
+          this.LocalStorageService.add("cardCvv",verifyCreditCard.cardCvv);
+          this.LocalStorageService.add("cardNumber",verifyCreditCard.cardNumber);
+          this.LocalStorageService.add("expirationDate",verifyCreditCard.expirationDate);
+          this.toastrService.success("Your card has been saved");
+        }
         this.rentalService.addRental(this.rental);
-        this.toastrService.success('Arabayı kiraladınız','İşlem başarılı');
+        this.toastrService.success('You rented the car','Successful');
       }else{
-        this.toastrService.error('Kartınızda yeterli bakiye yoktur','Hata');
+        this.toastrService.error('There is not enough price on your card','Hata');
       }
     }else{
-      this.toastrService.error('Bankanız bilgilerinizi onaylamadı','Hata');
+      this.toastrService.error('Your bank has not confirmed your information','Hata');
     }
   }
 
@@ -121,5 +137,31 @@ export class PaymentComponent implements OnInit {
   updateCard(creditCard:CreditCard){
     this.paymentService.updateCard(creditCard);
   }
+  getCardFromLocaleStorage(){
+ let nameOnTheCard = this.LocalStorageService.get("nameOnTheCard");
+ let cardCvv = this.LocalStorageService.get("cardCvv");
+ let cardNumber = this.LocalStorageService.get("cardNumber");
+ let expirationDate = this.LocalStorageService.get("expirationDate");
+    this.savedCard={
+  cardCvv:cardCvv,
+  cardNumber:cardNumber,
+  expirationDate:expirationDate,
+  nameOnTheCard:nameOnTheCard,
+  isChecked:true
+    }
 
+  }
+  setCurrentCard(){
+    let nameOnTheCard = this.LocalStorageService.get("nameOnTheCard");
+    let cardCvv = this.LocalStorageService.get("cardCvv");
+    let cardNumber = this.LocalStorageService.get("cardNumber");
+    let expirationDate = this.LocalStorageService.get("expirationDate");
+    this.cardCvv=cardCvv;
+    this.nameOnTheCard=nameOnTheCard;
+    this.cardNumber=cardNumber;
+    this.expirationDate=expirationDate;
+    this.toastrService.success("Successful")
+  
+
+  }
 }

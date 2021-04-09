@@ -10,4 +10,5 @@ export interface CarDetailDto{
     colorId:number;
     description:string;
     status:boolean;
+    minFindeksScore:number;
 }

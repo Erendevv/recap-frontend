@@ -9,6 +9,7 @@ import { RentalDetailDto } from 'src/app/models/dtos/rentalDetailDto';
 import { CarService } from 'src/app/services/car.service';
 import { CustomerService } from 'src/app/services/customer.service';
 import { RentalService } from 'src/app/services/rental.service';
+import { FindeksService } from 'src/app/services/findeks.service';
 
 
 @Component({
@@ -26,6 +27,9 @@ export class RentalComponent implements OnInit {
   rentDate:Date;
   returnDate:Date;
   customerId:number;
+  findeksLoad:boolean=true;
+  findeksError:boolean=true;
+  findeksMsg:string;
   @Input() car:Car;
 
 
@@ -41,7 +45,8 @@ export class RentalComponent implements OnInit {
     private router:Router,
     private datePipe:DatePipe,
     private carService:CarService,
-    private activatedRoute:ActivatedRoute) { }
+    private activatedRoute:ActivatedRoute,
+    private findeksService:FindeksService) { }
 
   ngOnInit(): void {
      this.activatedRoute.params.subscribe(params => {
@@ -112,6 +117,24 @@ export class RentalComponent implements OnInit {
       this.router.navigate(['/payment',JSON.stringify(createdRental)]);
       this.toastrService.info('Ödeme sayfasına yönlendiriliyorsunuz.','Ödeme İşlemleri')
     }
+  }
+  
+  customerChange(event: any) {
+    this.findeksLoad=false;
+
+    this.findeksService.query(this.car.id,this.customerId).subscribe((response) => {
+       if (response.success) {
+        this.toastrService.success(response.message);
+        this.findeksLoad=true;
+       }
+       else{
+         this.findeksMsg=response.message;
+         this.findeksLoad=false;
+         this.findeksError=false;
+         this.router.navigate(['/']);
+         this.toastrService.error(response.message);
+       } 
+    });
   }
 
   getRentMinDate() {

@@ -30,6 +30,10 @@ import { DetailColorComponent } from './components/color/detail-color/detail-col
 import { UpdateBrandComponent } from './components/brand/update-brand/update-brand.component';
 import { DetailBrandComponent } from './components/brand/detail-brand/detail-brand.component';
 import { UpdateCarComponent } from './components/car/update-car/update-car.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 
@@ -57,7 +61,10 @@ import { UpdateCarComponent } from './components/car/update-car/update-car.compo
     DetailColorComponent,
     UpdateBrandComponent,
     DetailBrandComponent,
-    UpdateCarComponent
+    UpdateCarComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent
  
 
 
@@ -75,6 +82,11 @@ import { UpdateCarComponent } from './components/car/update-car/update-car.compo
     ToastrModule.forRoot({
       positionClass:"toast-bottom-right"
     }),
+    JwtModule.forRoot({
+      config:{
+        tokenGetter: tokenGetter,
+      }
+    }),
   ],
   providers: [
     DatePipe,
@@ -82,3 +94,7 @@ import { UpdateCarComponent } from './components/car/update-car/update-car.compo
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function tokenGetter() {
+  return localStorage.getItem("token");
+}

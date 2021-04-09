@@ -1,0 +1,29 @@
+<body class="text-center">
+    <form [formGroup]="registerForm" class="form-signin" >
+      <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
+      <label for="inputEmail" class="sr-only">Email address</label>
+      <input
+      formControlName="email" type="email" id="inputEmail" class="form-control mb-3" placeholder="Email address" required autofocus>
+
+      <label for="inputPassword" class="sr-only ">Password</label>
+      <input  formControlName="password" type="password" id="inputPassword" class="form-control mb-3" placeholder="Password" required>
+      
+      <label for="inputpasswordConfirmation" class="sr-only ">Password</label>
+      <input  formControlName="passwordConfirmation" type="password" id="inputpasswordConfirmation" class="form-control mb-3" placeholder="Password Again" required>
+
+      <label for="inputFirstName" class="sr-only ">Password</label>
+      <input  formControlName="firstName" type="text" id="inputFirstName" class="form-control mb-3" placeholder="First Name" required>
+
+      <label for="inputLastName" class="sr-only ">Password</label>
+      <input  formControlName="lastName" type="text" id="inputLastName" class="form-control mb-3" placeholder="Last Name" required>
+
+   
+
+      <div class="checkbox mb-3">
+
+
+
+      </div>
+      <button (click)="register()" class="btn btn-lg btn-primary btn-block">Register</button>
+    </form>
+  </body>

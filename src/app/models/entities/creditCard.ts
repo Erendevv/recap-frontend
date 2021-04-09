@@ -5,4 +5,5 @@ export interface CreditCard{
     expirationDate:string;
     nameOnTheCard:string;
     moneyInTheCard?:number;
+    isChecked:boolean;
 }
